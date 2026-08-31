@@ -1,23 +1,21 @@
 {
-  "name": "PLAYTV — ดูทีวีออนไลน์",
+  "name": "📺 PLAYTV — ดูทีวีออนไลน์",
   "short_name": "PLAYTV",
-  "description": "เครื่องเล่น IPTV — รองรับ M3U / JSON / W3U / HLS / DASH",
   "start_url": "/iptvwebplayer/",
   "scope": "/iptvwebplayer/",
   "display": "standalone",
-  "background_color": "#0f1218",
   "theme_color": "#CC0033",
+  "background_color": "#1c0303",
   "orientation": "any",
-  "prefer_related_applications": false,
   "icons": [
     {
-      "src": "web-app-manifest-192x192.png",
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "web-app-manifest-512x512.png",
+      "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
