@@ -1,847 +1,928 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-      <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- ✅ PWA Essential -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#CC0033">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PLAYTV">
+  <meta name="description" content="PLAYTV — ดูทีวีออนไลน์ รองรับทุกฟอร์แมต">
+  
+  <!-- ✅ ไอคอน PWA -->
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
 
-  <title>Anik Boss IPTV | Responsive Dashboard</title>
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="33" android:compileSdkVersionCodename="13" android:versionCode="14" android:versionName="3.0" package="com.xcitv.pro" platformBuildVersionCode="33" platformBuildVersionName="13">
-	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="29" />
-	<uses-feature android:name="android.hardware.touchscreen" android:required="false" />
-	<uses-feature android:name="android.software.leanback" android:required="false" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<queries>
-		<intent>
-			<action android:name="android.media.browse.MediaBrowserService" />
-		</intent>
-	</queries>
-	<permission android:name="com.itv.tv.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSIONjvuhkolica" android:protectionLevel="signature" />
-	<uses-permission android:name="com.itv.tv.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSIONjvuhkolica" />
-	<application android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:banner="@mipmap/ic_bannerr" android:debuggable="true" android:icon="@mipmap/ic_banner" android:label="@string/app_name" android:name="com.stub.StubApp" android:preserveLegacyExternalStorage="true" android:requestLegacyExternalStorage="true" android:roundIcon="@mipmap/ic_banner" android:supportsRtl="true" android:theme="@style/AppTheme" android:usesCleartextTraffic="true">
-		<activity android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize" android:exported="true" android:launchMode="singleTask" android:name="com.itv.tv.SplashActivity" android:screenOrientation="landscape">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-				<category android:name="android.intent.category.LEANBACK_LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity android:configChanges="screenLayout|screenSize|smallestScreenSize" android:name="com.itv.tv.MainActivity" android:screenOrientation="sensor" />
-		<activity android:configChanges="screenLayout|screenSize|smallestScreenSize" android:name="com.itv.tv.ChannelActivity" android:screenOrientation="sensor" />
-		<activity android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize" android:excludeFromRecents="true" android:launchMode="singleTask" android:name="com.itv.tv.PlayerActivity" android:screenOrientation="landscape" android:supportsPictureInPicture="true" android:theme="@style/AppThemePlayer" />
-		<receiver android:exported="true" android:name="com.itv.tv.LaunchAtBootReceiver">
-			<intent-filter>
-				<action android:name="android.intent.action.BOOT_COMPLETED" />
-				<action android:name="android.intent.action.QUICKBOOT_POWERON" />
-				<category android:name="android.intent.category.DEFAULT" />
-			</intent-filter>
-		</receiver>
-		<activity android:excludeFromRecents="true" android:exported="false" android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-		<service android:exported="true" android:name="com.google.android.gms.auth.api.signin.RevocationBoundService" android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" android:visibleToInstantApps="true" />
-		<activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-		<provider android:authorities="com.xcitv.pro.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
-			<meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup" />
-			<meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup" />
-			<meta-data android:name="androidx.profileinstaller.ProfileInstallerInitializer" android:value="androidx.startup" />
-		</provider>
-		<uses-library android:name="androidx.window.extensions" android:required="false" />
-		<uses-library android:name="androidx.window.sidecar" android:required="false" />
-		<receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.profileinstaller.ProfileInstallReceiver" android:permission="android.permission.DUMP">
-			<intent-filter>
-				<action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-			</intent-filter>
-			<intent-filter>
-				<action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-			</intent-filter>
-			<intent-filter>
-				<action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-			</intent-filter>
-			<intent-filter>
-				<action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-			</intent-filter>
-		</receiver>
-	</application>
-</manifest>
+  <style>
+    :root {
+      --bg: #0f1218; --s1: #1a1f2b; --s2: #242a38; --s3: #2e3546;
+      --accent: #92c83e; --accent2: #7ab627; --text: #ffffff; --muted: #9ca3af;
+      --ok: #22c55e; --err: #ef4444;
+      --cat-active: #84cc16;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Roboto', sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; }
+    .hidden { display: none !important; }
 
-    <div class="message"PLAYID XTREAM</div>
+    .top-bar {
+      background: linear-gradient(180deg, rgba(0,0,0,0.95), rgba(0,0,0,0.7));
+      padding: 12px 16px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .top-link {
+      color: #ff0000;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+    .top-link.pink { color: #ff69b4; }
+    .date-time {
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .logo-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: rgba(0,0,0,0.4);
+    }
+    .play-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #000;
+      font-weight: bold;
+    }
+    .logo-text {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .open-cat-btn {
+      position: fixed;
+      top: 130px;
+      left: 16px;
+      z-index: 50;
+      background: var(--s2);
+      color: var(--text);
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .open-cat-btn:active { background: var(--s3); }
+
+    .category-sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 300px;
+      max-width: 90vw;
+      height: 100vh;
+      background: var(--s1);
+      border-left: 1px solid rgba(255,255,255,0.1);
+      z-index: 200;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.5);
+    }
+    .category-sidebar.open { transform: translateX(0); }
     
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="เว็บไซต์ DS และทีวีออนไลน์ รวมลิงก์ดูทีวี กีฬา และหนังออนไลน์ในที่เดียว">
-    <meta name="keywords" content="DS, ทีวีออนไลน์, ดูหนัง, กีฬา, YouTube">
-    <meta name="author" content="พลอย">
-    <title>เพื่อความบันเทิงภายในบ้าน</title>
+    .cat-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cat-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .cat-close {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 24px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .cat-close:hover { color: #fff; }
 
-<script src="https://cdn.logwork.com/widget/clock.js"></script>
-<a href="https://logwork.com/current-time-in-bangkok-thailand-krung-thep-maha-nakhon" class="clock-time" data-style="default-numeral" data-size="250" data-timezone="Asia/Bangkok">ต.ราชาเทวะ, บางพลี, ประเทศไท</a>
-    
-    </font>
-</br>
+    .cat-list {
+      flex: 1;
+      padding: 12px 16px;
+      overflow-y: auto;
+    }
+    .cat-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      color: var(--muted);
+      transition: all 0.2s;
+      border: 2px solid transparent;
+    }
+    .cat-item:hover {
+      background: var(--s2);
+      color: var(--text);
+    }
+    .cat-item.active {
+      background: var(--cat-active);
+      color: #000;
+      font-weight: 600;
+      border-color: #65a30d;
+    }
+    .cat-icon {
+      font-size: 20px;
+      width: 24px;
+      text-align: center;
+      flex-shrink: 0;
+    }
 
+    .cat-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 199;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+    .cat-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
 
-<h1>ต้น IPTV 3.0 อยู่บ้านดูหนัง</h1>
-<font color="white">
-วันนี้
-<script>
-<!-- START HIDE
-print1="";
-print2="";
-print3="";
-today = new Date();
-weekday = today.getDay();
-if (weekday == 6) print1='วันเสาร์';
-if (weekday == 0) print1='วันอาทิตย์';
-if (weekday == 1) print1='วันจันทร์';
-if (weekday == 2) print1='วันอังคาร';
-if (weekday == 3) print1='วันพุธ';
-if (weekday == 4) print1='วันพฤหัสบดี';
-if (weekday == 5) print1='วันศุกร์';
-month = today.getMonth();
-if (month == 0) print2='เดือนมกราคม';
-if (month == 1) print2='เดือนกุมภาพันธ์';
-if (month == 2) print2='เดือนมีนาคม';
-if (month == 3) print2='เดือนเมษายน';
-if (month == 4) print2='เดือนพฤษภาคม';
-if (month == 5) print2='เดือนมิถุนายน';
-if (month == 6) print2='เดือนกรกฎาคม';
-if (month == 7) print2='เดือนสิงหาคม';
-if (month == 8) print2='เดือนกันยายน';
-if (month == 9) print2='เดือนตุลาคม';
-if (month == 10) print2='เดือนพฤศจิกายน';
-if (month == 11) print2='เดือนธันวาคม';
-date = today.getDate();
-year=today.getYear();
-document.write (print1,'ที่ ',date, ' ', print2,' พศ. ',year+2443);
-// STOP HIDE --></script>
+    .player-area {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .player-placeholder {
+      font-size: 64px;
+      color: #444;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: block;
+      outline: none;
+    }
+    .player-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 16px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .control-left, .control-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .control-btn {
+      background: transparent;
+      border: none;
+      color: #ccc;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .moon-btn {
+      background: #fbbf24;
+      color: #000;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .menu-btn {
+      background: var(--accent);
+      color: #000;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 600;
+    }
 
+    .channel-section {
+      padding: 16px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .section-title {
+      font-size: 15px;
+      color: var(--muted);
+    }
+    .playlist-tabs {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .tab-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: none;
+      background: var(--s2);
+      color: var(--muted);
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .tab-btn.active {
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+    }
+    .add-playlist-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: none;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #000;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .search-box {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--s3);
+      background: var(--s1);
+      color: var(--text);
+      font-size: 14px;
+      width: 180px;
+    }
 
-<hr>
-</font>
-    ยินดีต้อนรับสู่เวปไซต์ ต้น IPTV
-    
-<body>
-<font color="white">
-<p id="time"></p>
-<script>
-  const today = new Date();
+    .channel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 12px;
+    }
+    @media (min-width: 768px) {
+      .channel-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+    }
+    .channel-card {
+      background: var(--s1);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid transparent;
+    }
+    .channel-card:hover, .channel-card.active {
+      background: var(--s2);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .channel-logo {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 8px;
+      border-radius: 8px;
+      background: var(--s2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      overflow: hidden;
+    }
+    .channel-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .channel-name {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.3;
+      word-break: break-word;
+    }
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+    }
+    .empty-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
 
-  // แสดงเวลา
-  document.getElementById("time").textContent = today.toLocaleTimeString();
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 300;
+      padding: 20px;
+    }
+    .modal-box {
+      width: 100%;
+      max-width: 480px;
+      background: var(--s1);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .modal-head {
+      padding: 16px 20px;
+      background: var(--s2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-head h3 {
+      font-size: 17px;
+      font-weight: 600;
+    }
+    .modal-close {
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .modal-body {
+      padding: 20px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .form-input, .form-file {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--s3);
+      background: var(--s2);
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+    }
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #000;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .status-text {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .status-ok { color: var(--ok); }
+    .status-err { color: var(--err); }
 
-</script>
-</body>
- 
- 
-  <div id="loader">
-
-    <div class="pulse">ANIK BOSS</div>
-
-    <div style="color: #666; margin-top: 10px; font-size: 10px; letter-spacing: 2px;">LOADING SECURE IPTV...</div>
-
-  </div>
-
-  <nav class="top-nav">
-
-    <div class="logo">ANIK BOSS IPTV</div>
-
-    <div class="dashboard-stats">
-
-      <div class="stat-item"><i class="fas fa-location-arrow"></i><span id="location-name">...</span></div>
-
-      <div class="stat-item"><i class="fas fa-temperature-high"></i><span id="temp">--°C</span></div>
-
-      <div class="stat-item"><i class="fas fa-clock"></i><span id="clock">00:00</span></div>
-
-    </div>
-
-  </nav>
-
-  <div class="marquee-container">
-
-    <marquee scrollamount="5">IPTV BY Anik Boss  01859334774</marquee>
-
-  </div>
- 
-    <style>
-
-
-        /* CSS Animation สำหรับพื้นหลัง */
-        @keyframes backgroundAnimation {
-            0% {
-                background-size: 100%;
-                background-position: center;
-            }
-            50% {
-                background-size: 120%;
-                background-position: center;
-            }
-            100% {
-                background-size: 100%;
-                background-position: center;
-            }
-        }
-
-        html, body {
-            margin: 0;
-            padding: 0;
-            min-height: 100%; /* ใช้ min-height เพื่อให้เนื้อหายืด */
-            overflow-x: hidden;
-            background-image: url();
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: yellow;
-            font-family: 'Arial', sans-serif;
-            animation: backgroundAnimation 10s infinite alternate;
-            text-align: center;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start; /* เปลี่ยนจาก center เป็น flex-start เพื่อให้เลื่อนหน้าได้ */
-            padding: 0 10px;
-        }
-
-        /* โลโก้ */
-        .logo-container {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 15vw;
-            padding: 10px;
-        }
-
-        .logo {
-            width: 100%;
-            height: auto;
-        }
-
-        header {
-            background-color: rgba(0, 1, 0, 0.3); /* สีฟ้าโปร่งใส */
-            color: white;
-            font-size: 5vw;
-            font-weight: bold;
-            padding: 2vw 4vw;
-            border-radius: 8px;
-            margin: 5vh 0;
-            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.0);
-            animation: fadeIn 3s ease-out;
-        }
-
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 90%;
-            max-width: 500px;
-            margin: 2vh 0;
-        }
-
-        .button {
-            background-color: rgba(255, 255, 0, 0.1); /* สีพื้นหลังโปร่งใสมาก */
-            color: yellow;
-            font-size: 4vw;
-            font-weight: bold;
-            padding: 2vh 3vw;
-            border: 2px solid yellow;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            margin: 2vh 0;
-            width: 100%;
-            box-sizing: border-box;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-        }
-
-        .button:hover {
-            background-color: rgba(255, 255, 0, 0.3); /* เปลี่ยนสีเมื่อ hover */
-            transform: translateY(-5px);
-        }
-
-        .youtube-button {
-            margin-top: 3vh;
-        }
-
-        footer {
-            margin-top: 50px;
-            padding: 20px;
-            color: yellow;
-            background: rgba(0, 0, 0, 0.5); /* โปร่งใสเพื่อให้ยังเห็นพื้นหลัง */
-            width: 100%;
-            text-align: center;
-        }
-
-        /* อนิเมชั่นสำหรับ header (Fade in) */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-    </style>
+    .app-btn {
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: none;
+      background: #ea4335;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  </style>
 </head>
+<body>
 
-
-<div id="horizontalMenu">
-  <a href="https://djtono.short.gy/TONOR-V1.m3u" target="_blank" class="icon-link" title="ต้นทีวีต้นทีวี">
-    <img src="https://cdn.pixabay.com/animation/2022/09/09/08/46/08-46-03-703_512.gif" alt="TVZAA Logo" />
-  </a>
-  <a href="https://www.google.com" target="_blank" class="icon-link" title="Google">
-    <img src="https://cdn-icons-png.flaticon.com/128/300/300221.png" alt="Google Logo" />
-  </a>
-  <a href="https://app.short.io/users/dashboard/1407508/links" target="_blank" class="icon-link" title="YouTube">
-    <img src="https://cdn-icons-png.flaticon.com/128/1384/1384060.png" alt="YouTube Logo" />
-  </a>
-  <a href="https://sugus320.github.io/sugus320tv/" target="_blank" class="icon-link" title="sugustv">
-    <img src="https://1.gravatar.com/avatar/43cda6f8172370d0d37e6fe5829f880bcf11cebf27bbc7713b99ca7fbb364ace?s=250&d=identicon&r=G" alt="LINE Logo" />
-  </a> 
-  <a href="https://djtono.short.gy/3STYLES.m3u" target="_blank" class="icon-link" title="3STYLES">
-    <img src="https://images.icon-icons.com/4048/PNG/512/facebook_logo_icon_257007.png" />
-</a>
-    
-<a href="https://www.jokerzone68.com/list-games" target="_blank" class="icon-link" title="WEBTVZA_LIVETV_2">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBoQp2iYaxhHIv9Gx8wbWfsLmJDq110lxO4w&s">
-  </a>
+<div class="top-bar">
+  <a href="https://kicksball.com/tv" class="top-link">เข้าสู่เว็บไซต์ / ENTER SIT</a>
+  <a href="https://sugus25.github.io/IPTV/" class="top-link pink">sugus25</a>
+  <div class="date-time">
+    <span id="thaiDate"></span><br>
+    <span id="thaiTime"></span>
+  </div>
 </div>
 
-<body>
+<div class="logo-header">
+  <div class="play-icon">▶</div>
+  <div class="logo-text">PLAY TV</div>
+</div>
+
+<button class="open-cat-btn" id="openCatBtn">📂 หมวดหมู่</button>
+
+<div class="cat-overlay" id="catOverlay"></div>
+<div class="category-sidebar" id="catSidebar">
+  <div class="cat-header">
+    <span class="cat-title">หมวดหมู่</span>
+    <button class="cat-close" id="closeCat">×</button>
+  </div>
+  <div class="cat-list" id="catList">
+    <div class="cat-item active" data-group="all">
+      <span class="cat-icon">📋</span>
+      <span>ทั้งหมด</span>
+    </div>
+  </div>
+</div>
+
+<div class="player-area" id="playerArea">
+  <div class="player-placeholder" id="playerPlaceholder">📺</div>
+  <video id="video" controls playsinline controlslist="nodownload" class="hidden"></video>
+  <div class="player-controls" id="playerControls" style="display: none;">
+    <div class="control-left">
+      <span id="timeDisplay">0:00</span>
+    </div>
+    <div class="control-right">
+      <button class="control-btn">🔊</button>
+      <button class="control-btn">⛶</button>
+      <button class="control-btn moon-btn">🌙</button>
+      <button class="control-btn menu-btn">เมนู</button>
+    </div>
+  </div>
+</div>
+
+<div class="channel-section">
+  <div class="section-header">
+    <div class="section-title">ช่องรายการ</div>
+    <div class="playlist-tabs">
+      <button class="tab-btn active" data-playlist="default" id="playlistTab">PLAYTV (0)</button>
+      <button class="add-playlist-btn" id="addPlaylistBtn">➕ เพิ่มเพลย์ลิสต์</button>
+    </div>
+    <input type="text" class="search-box" id="searchBox" placeholder="ค้นหาช่อง...">
+  </div>
+  <div class="channel-grid" id="channelGrid">
+    <div class="empty-state">
+      <div class="empty-icon">📂</div>
+      <h3>ยังไม่มีเพลย์ลิสต์</h3>
+      <p>กดปุ่ม "➕ เพิ่มเพลย์ลิสต์" เพื่อเริ่มใช้งาน<br>รองรับ: .m3u / .m3u8 / .json / .w3u</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay hidden" id="addModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>📂 เพิ่มเพลย์ลิสต์</h3>
+      <button class="modal-close" id="closeAddModal">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>🔗 จากลิงก์ URL</label>
+        <input type="text" class="form-input" id="playlistUrl" placeholder="วางลิงก์ .m3u / .json / .w3u">
+      </div>
+      <div class="form-group">
+        <label>📁 จากไฟล์ในเครื่อง</label>
+        <input type="file" class="form-file" id="playlistFile" accept=".m3u,.m3u8,.json,.w3u">
+      </div>
+      <button class="btn-primary" id="loadBtn">✅ โหลดเพลย์ลิสต์</button>
+      <div class="status-text" id="loadStatus"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay hidden" id="playerModal">
+  <div class="modal-box" style="max-width: 800px;">
+    <div class="modal-head">
+      <h3 id="playerTitle">วิดีโอ</h3>
+      <button class="modal-close" id="closePlayer">×</button>
+    </div>
+    <div style="padding: 0;">
+      <video id="modalVideo" controls playsinline style="width: 100%; background: #000;"></video>
+      <div style="padding: 16px 20px; display: flex; flex-wrap: wrap; gap: 10px;">
+        <button class="app-btn" id="openInAppBtn">📱 เปิดในแอปอื่น</button>
+        <button style="padding: 10px 14px; border-radius: 8px; border: none; background: var(--s2); color: white; cursor: pointer;" id="copyBtn">📋 คัดลอกลิงก์</button>
+      </div>
+      <div id="playerErr" style="padding: 0 20px 16px; color: var(--err); display: none;">❌ ไม่สามารถเล่นสตรีมนี้ได้</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function updateDateTime() {
+  const today = new Date();
+  const weekDays = ['วันอาทิตย์', 'วันจันทร์', 'วันอังคาร', 'วันพุธ', 'วันพฤหัสบดี', 'วันศุกร์', 'วันเสาร์'];
+  const months = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+  const buddhistYear = today.getFullYear() + 543;
+  const dateStr = `${weekDays[today.getDay()]} ที่ ${today.getDate()} เดือน${months[today.getMonth()]} พ.ศ. ${buddhistYear}`;
+  const timeStr = today.toLocaleTimeString('th-TH', { hour12: false });
   
-<style>
-        body {
-            background-color: #000;
-            color: #FF18DD;
-            margin: 0;
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        img {
-            border-radius: 5px;
-            border: 1px solid #87CEFA;
-            padding: 2px;
-            margin: 3px;
-            height: 50px;
-            width: 50px;
-        }
-    </style>  
-
-
-  <header>ทีวีดิจิตอลไทย</header>
-<maian>
-<a href="intent://cdn-edge-ott.prd.go.th/live_vlc/smil:c30f-97f7-c767-ca64-98aa/chunklist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0001.png" border="1px"></a>
-
-
-<a href="intent://thaipbs-live.cdn.byteark.com/live/playlist_1080p/index.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0014.png" border="1px"></a>
-
-
-
-<a href="intent://thaipbs-ujxrch.cdn.byteark.com/live/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/ALTV.PNG" border="1px"></a>
-
-
-
-<a href="intent://639bc5877c5fe.streamlock.net/tv5hdlive/tv5hdlive/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://ais-vidnt.com/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon//ch5new.logo.png" border="1px"></a>
-
-
-
-<a href="https://edge6a.v2h-cdn.com/t_sport/t_sport.stream/playlist.m3u8">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/T-SPorts_7_Final.png" border="1px"></a>
-
-
-
-<a href="intent://cdn-edge.i-iptv.com/live3/91b1-ff25-f5ee-c27f-283a/chunklist_w1922821612.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0048.png" border="1px"></a>
-
-
-
-<a href="intent://edge6a.v2h-cdn.com/tnn24/tnn24.stream/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://cms.dmpcdn.com/livetv/2017/10/18/f1b957db-b175-45fc-ab2b-60150f9c570a.png" border="1px"></a>
-
-<a href="intent://edge6a.v2h-cdn.com/jkn18/jkn18.stream/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://ais-vidnt.com/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/JKN18.png" border="1px"></a>
-
-<a href="intent://edge6a.v2h-cdn.com/nation/nation.stream/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://ais-vidnt.com/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0021.png" border="1px"></a>
-
-
-
-                
-<a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/workpointtv/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end" class="channel">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0015_R.png"
-      border="1px"></a>
-                
-                <a href="intent://udn-streamer1.cdn.3bbtv.com:8443/3bb/live/23/23.mpd
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end" class="channel">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0015_R.png"
-      border="1px"></a>
-
-<a href="intent://edge6a.v2h-cdn.com/true4u/true4u.stream/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0054.png" border="1px"></a>
-
-
-
-<a href="intent://bcovlive-a.akamaihd.net/fb7ac9cc4e1140238e3077ffd29337fe/ap-southeast-1/6415628290001/profile_0/chunklist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://ais-vidnt.com/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0019.png" border="1px"></a>
-
-
-
-<a href="intent://prsmedia-mykojh.cdn.byteark.com/fleetstream/live/720p/index.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0006.png" border="1px"></a>
-                
-<a href="intent://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/29/29.mpd
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end" class="channel">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0016.png"
-      border="1px"></a>
-                
-        <a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/mono29/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end" class="channel">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0016.png"
-      border="1px"></a>
-                
-
-<a href="intent://live-org-01-cdn.mcot.net/mcothd1080p_edge/smil:mcothd1080p.smil/chunklist_w58587999_b2000000.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0008.png" border="1px"></a>
-
-
-<a href="intent://bcovlive-a.akamaihd.net/e11d0db446fe41fe9be61157033f9325/ap-southeast-1/6415628290001/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://ais-vidnt.com/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0012.png" border="1px"></a>
-
-<a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/thairathtv/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0013_R.png" border="1px"></a>
-
-     
-                <a href="intent://udn-streamer1.cdn.3bbtv.com:8443/3bb/live/32/32.mpd
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end" class="channel">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0013_R.png"
-      border="1px"></a>
-                
-                <a href="intent://tv.trueid.net/embed/thairathtv-hd
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end" class="channel">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0013_R.png"
-      border="1px"></a>
-                
-                
-
-<a href="intent://edge2a.v2h-cdn.com/3hd/3hd.stream/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://ch3plus.com/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0003.png" border="1px"></a>
-
-
-
-<a href="intent://lb1-live-mv.v2h-cdn.com/hls/ffad/amarin/amarin.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://www.amarintv.com/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/AmarinTV_NEW512.png" border="1px"></a>
-
-
-<a href="intent://live-cdn-hwc.ch7.com/livech7hd/HD_720p.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://wwww.ch7.com/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0018.png" border="1px"></a>
-
-<a href="intent://live-cdn-hwc.ch7.com/livech7hd/HD_1080p.m3u8?vhost=streaming-hwc.ch7.com
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://www.ch7.com/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0018.png" border="1px"></a>
-
-<a href="intent://dookeela.live/live-tv/pptv
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0022.png" border="1px"></a>
-
-
-
-<a href="intent://stream1.stou.ac.th/live/stou_720p/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://ais-vidnt.com/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://img5.pic.in.th/file/secure-sv1/stou.jpeg" border="1px"</a>
-
-<a href="intent://server1.streamssl.com/stream/news1_mid.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.Referer=https://.news1.live14.com
-/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0036.png" border="1px"></a>
-
-<a href="intent://live.topnews.co.th/hls/topnews_a_720.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.Referer=https://live.topnews.co.th
-/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/TOPNEWS.PNG" border="1px"></a>
-
-
-
-<a href="intent://live.x2.co.th/live/13livetv-th.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.Referer=https://live.x2.co.th
-/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://img2.pic.in.th/pic/images_3-transformed.png" border="1px"></a>
-
-
-
-<a href="intent://vdo.plathong.net/tvmuslim/tvmuslim/chunklist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=android;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://cdn.pixabay.com/photo/2023/04/04/18/15/islamic-tv-7899989_1280.png" border="1px"></a>
-
-<a href="intent://liveh12.vtvcab.vn/hls/ONVTC1_CL/01.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=android;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://img5.pic.in.th/file/secure-sv1/0e44c9f9b0d1196db9b1464b7a6be790.png" border="1px"></a>
-
-<a href="intent://ott1.nethubtv.vn/live/vtv1/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=android;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0mZqAymv1uvDCeuZaKw-ejv2Rp3NvtGOi6ywYR7HhBSE_S7AcWRq6fmbJ&s=10" border="1px"></a>
-
-<a href="intent://pa.thst.vn/hls-live/livepkgr/_definst_/liveevent/livestream.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=android;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDPL1JCmNGl1qFjyrZxGzj2fME4SVW-eNjmQ&usqp=CAU" border="1px"></a>
-
-<a href="intent://103.90.220.236/qtvlive/tv1live.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=android;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaMvAGJgmseElggu2vfRi8iORNxAIRdIhgiQ&usqp=CAU" border="1px"></a>
-
-<a href="intent://tv.kgtv.vn/live/kgtv1/kgtv1.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=android;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsUd8JPlLJ92zYIYKjDV-5zz1PJXKRD4XKHQ&s" border="1px"></a>
-
-<font color="red">
- <header>หนัง ออนไลน์
-    </header>
-    
-    <a href="intent://49.0.64.96:8007/H-Channel#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/&userAgent=exo_player;S.title=ต้นทีวี;scheme=http;type=video/mp4;end">
-        <img src="https://i.ibb.co/MxZHkhvV/logo-universal.png" border="1px">
-
-    
-            
-<a href="intent://49.0.64.96:8007/Cartoonumi
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=http;type=video/avc1.640028,mp4a.40.2;end" class="channel">
-<img src="https://i.ibb.co/qYGcDkdc/logo-****-toon.png"
-border="1px">
-                
-
-            
-<a href="intent://49.0.64.96:8007/PING
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=http;type=video/avc1.640028,mp4a.40.2;end" class="channel">
-<img src="https://i.ibb.co/nqWvLRYF/logo-fuckmovie.png"
-border="1px">
-                
-            
-<a href="intent://49.0.64.96:8007/SERIES
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=http;type=video/avc1.640028,mp4a.40.2;end" class="channel">
-<img src="https://i.ibb.co/wFSYqgpG/logo-fuckseries.png"
-border="1px">
-
-
-<a href="Intent://freelive2.inwstream.com:1935/freelive-edge/fwmov_fw-iptv.stream/chunks.m3u8?nimblesessionid=187183747&wmsAuthSign=c2VydmVyX3RpbWU9OC8yMi8yMDI1IDg6NDE6MDYgQU0maGFzaF92YWx1ZT1qWWFDUHYrekZZTHg3R2Z6MlJ5eTJ3PT0mdmFsaWRtaW51dGVzPTI=&demo
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://www.inwiptv.asia/demo.php&userAgent=User Agent: exo_player;S.title=ต้นทีวี;scheme=http;type=video/avc1.640028,mp4a.40.2;end" class="channel">
-<img src="https://www.fileinw.com/postor/20240429213309FWMOV.jpg"
-border="1px">
-
-
-<a href="Intent://github.com/cattviptv2605/m3u8/raw/refs/heads/main/movies2.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=http;type=video/mp4;end">
-    <img src="https://f.ptcdn.info/539/005/000/1369556467-movienight-o.jpg",
-border="1px"></a>
-
-<a href="Intent://live1.thaitvstream.com/play/siamnewstv/index.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-    <img src="https://thaitvstream.com/streaming/siamnewstv/siamnewstv.png",
-border="1px"></a>
-
-            
-<a href="intent://freelive2.inwstream.com:1935/freelive-edge/gags_fw-iptv.stream/chunks.m3u8?nimblesessionid=187183189&wmsAuthSign=c2VydmVyX3RpbWU9OC8yMi8yMDI1IDg6MTA6MzkgQU0maGFzaF92YWx1ZT1Ea1RVRnFzK28xRVNwNXErRzlUamhRPT0mdmFsaWRtaW51dGVzPTI=&demo
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://www.inwiptv.asia/demo.php&userAgent=exo_player;S.title=ต้นทีวี;scheme=http;type=video/avc1.640028,mp4a.40.2;end" class="channel">
-<img src="https://www.fileinw.com/postor/20240429213343just_for_laughs_gags.jpg"
-border="1px">
-
-
-<a href="intent://freelive2.inwstream.com:1935/freelive-edge/fwtoon_fw-iptv.stream/chunks.m3u8?nimblesessionid=187183718&wmsAuthSign=c2VydmVyX3RpbWU9OC8yMi8yMDI1IDg6Mzg6MjMgQU0maGFzaF92YWx1ZT1MZTNJNWE2b3UwRVpmaXNkMmFFVlV3PT0mdmFsaWRtaW51dGVzPTI=&demo
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://www.inwiptv.asia/demo.php&userAgent=exo_player;S.title=ต้นทีวี;scheme=http;type=video/avc1.640028,mp4a.40.2;end" class="channel">
-<img src="https://www.fileinw.com/postor/20240429213651FWTOON.jpg"
-border="1px">
-
-<a href="intent://freelive2.inwstream.com:1935/freelive-edge/fwsov_fw-iptv.stream/chunks.m3u8?nimblesessionid=187183648&wmsAuthSign=c2VydmVyX3RpbWU9OC8yMi8yMDI1IDg6MzQ6MjMgQU0maGFzaF92YWx1ZT04Zzl6Zk9UenhxVUIrK2RCUHFnNGtBPT0mdmFsaWRtaW51dGVzPTI=&demo
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://www.inwiptv.asia/demo.php&userAgent=exo_player;S.title=ต้นทีวี;scheme=http;type=video/avc1.640028,mp4a.40.2;end">
-<img src="https://www.fileinw.com/postor/20240429213326FWSOV.jpg"
-border="1px">
-<!--chunks.m3u8?nimblesessionid=187183747&wmsAuthSign=c2VydmVyX3RpbWU9OC8yMi8yMDI1IDg6NDE6MDYgQU0maGFzaF92YWx1ZT1qWWFDUHYrekZZTHg3R2Z6MlJ5eTJ3PT0mdmFsaWRtaW51dGVzPTI=&demo-->
-
-    </a><a href="intent://dookeela.live/live-tv/trueseries#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-        <img src="https://cms.dmpcdn.com/livetv/2023/04/28/456c5d00-e599-11ed-b550-9935ba8025b9_webp_original.webp" border="1px">
-
-    </a><a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/truefilmasia/playlist.m3u8#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-        <img src="https://cms.dmpcdn.com/livetv/2023/12/15/547673c0-9af8-11ee-b1e6-1fd23e73ab60_webp_original.webp" border="1px">
-
-</a><a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/truethaifilm/playlist.m3u8#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookezela.live/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-        <img src="https://cms.dmpcdn.com/livetv/2023/12/15/5607e930-9af8-11ee-b035-95a91afb0fb9_webp_original.webp" border="1px">
-   
-    </a><a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/truefilm1/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://cms.dmpcdn.com/livetv/2023/12/15/54226050-9af8-11ee-b1e6-1fd23e73ab60_webp_original.webp" border="1px">
-
-</a><a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/truefilm2/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://cms.dmpcdn.com/livetv/2023/12/15/5440e4d0-9af8-11ee-8086-17feeb8a4188_webp_original.webp" border="1px">
-
-</a><a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/truemoviehits/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://cms.dmpcdn.com/livetv/2023/12/15/55139e20-9af8-11ee-ba6c-fd47adcb0961_webp_original.webp" border="1px">
-
-</a><a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/trueasianmore/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://goal-th.com/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/True_Asian_More.webp" border="1px">
-
-</a><a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/trueidasianseries/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://goal-th.com/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://dookeela.live/uploads/1741551484.png" border="1px"></a>
-
-
-<a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/3bbasian/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE///channelicon//3BBAsian_new.png" border="1px">
-
-</a><a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/mono29plus/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE///channelicon//Mono29Plus_new.png" border="1px">
-
-</a><a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/hbo/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/R_0148.png" border="1px"></a>
-
-<a href="intent://49.0.64.96:8007/IZAA
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=http;type=video/mp4;end">
-<img src="https://i.ibb.co/B53tBWkh/logoizaamovie.png" border="1px">
-
-</a><a href="intent://dookeela.live/live-tv/hbo-hits
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0151.png" border="1px">
-
-</a><a href="intent://dookeela.live/live-tv/hbo-signature
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0149.png" border="1px">
-
-</a><a href="intent://dookeela.live/live-tv/cinemax
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0147.png" border="1px">
-</a><a href="intent://dookeela.live/live-tv/axn
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://img5.pic.in.th/file/secure-sv1/oie_transparent-1.png" border="1px">
-</a><a href="intent://dookeela.live/live-tv/paramount-network
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//ParamountNetwork.png" border="1px">
-</a><a href="intent://dookeela.live/live-tv/warnertv
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0105.png" border="1px"></a>
-
-<a href="intent://49.0.64.96:8007/PING
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=http;type=video/mp4;end">
-<img src="https://i.ibb.co/nqWvLRYF/logo-fuckmovie.png" border="1px"></a>
-
-<a href="intent://49.0.64.96:8007/PLUSE
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="http://i.ibb.co/7xf3sR9Z/logo-pluse.png" border="1px"></a>
-
-
+  document.getElementById('thaiDate').textContent = dateStr;
+  document.getElementById('thaiTime').textContent = timeStr;
+}
+updateDateTime();
+setInterval(updateDateTime, 1000);
+
+const catSidebar = document.getElementById('catSidebar');
+const catOverlay = document.getElementById('catOverlay');
+const openCatBtn = document.getElementById('openCatBtn');
+const closeCat = document.getElementById('closeCat');
+
+function toggleCatMenu() {
+  catSidebar.classList.toggle('open');
+  catOverlay.classList.toggle('active');
+}
+openCatBtn.addEventListener('click', toggleCatMenu);
+closeCat.addEventListener('click', toggleCatMenu);
+catOverlay.addEventListener('click', toggleCatMenu);
+
+let hls = null, dashPlayer = null;
+let currentFullUrl = '';
+let allChannels = [];
+let allGroups = new Set();
+let activeGroup = 'all';
+
+function rebuildCategories() {
+  const catList = document.getElementById('catList');
+  catList.innerHTML = `
+    <div class="cat-item ${activeGroup === 'all' ? 'active' : ''}" data-group="all">
+      <span class="cat-icon">📋</span>
+      <span>ทั้งหมด (${allChannels.length})</span>
+    </div>
+  `;
   
-    <header>สารคดี</header>
+  allGroups.forEach(groupName => {
+    const count = allChannels.filter(c => c.group === groupName).length;
+    const div = document.createElement('div');
+    div.className = `cat-item ${activeGroup === groupName ? 'active' : ''}`;
+    div.dataset.group = groupName;
+    div.innerHTML = `
+      <span class="cat-icon">${getGroupIcon(groupName)}</span>
+      <span>${groupName} (${count})</span>
+    `;
+    div.addEventListener('click', () => {
+      activeGroup = groupName;
+      renderChannels();
+      toggleCatMenu();
+    });
+    catList.appendChild(div);
+  });
+
+  catList.querySelector('[data-group="all"]').addEventListener('click', () => {
+    activeGroup = 'all';
+    renderChannels();
+    toggleCatMenu();
+  });
+}
+
+function getGroupIcon(name) {
+  const n = (name || '').toLowerCase();
+  if (n.includes('ไทย') || n.includes('thai')) return '🇹🇭';
+  if (n.includes('กีฬา') || n.includes('sport')) return '⚽';
+  if (n.includes('หนัง') || n.includes('movie') || n.includes('บันเทิง')) return '🎬';
+  if (n.includes('ข่าว') || n.includes('news')) return '📰';
+  if (n.includes('การ์ตูน')) return '🧸';
+  if (n.includes('ต่างประเทศ')) return '🌍';
+  if (n.includes('ใหม่') || n.includes('new')) return '🔥';
+  return '📁';
+}
+
+function renderChannels(searchKeyword = '') {
+  const grid = document.getElementById('channelGrid');
+  grid.innerHTML = '';
+  
+  let list = allChannels;
+  if (activeGroup !== 'all') list = list.filter(ch => ch.group === activeGroup);
+  if (searchKeyword) list = list.filter(ch => ch.name.toLowerCase().includes(searchKeyword.toLowerCase()));
+
+  if (list.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">${allChannels.length === 0 ? '📂' : '🔍'}</div>
+        <h3>${allChannels.length === 0 ? 'ยังไม่มีเพลย์ลิสต์' : 'ไม่พบช่อง'}</h3>
+        <p>${allChannels.length === 0 ? 'กดปุ่ม "➕ เพิ่มเพลย์ลิสต์" เพื่อเริ่มใช้งาน' : ''}</p>
+      </div>
+    `;
+    return;
+  }
+
+  list.forEach((ch) => {
+    const card = document.createElement('div');
+    card.className = 'channel-card';
+    const logoUrl = ch.logo || '';
+    const fallbackIcon = ch.name.charAt(0) || '📺';
     
-    
-    <a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/animal-planet/playlist.m3u8#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-        <img src="https://dookeela.live/uploads/1706112700.png" alt="">
-    </a>
-    
-    <a href="intent://freelive2.inwstream.com:1935/freelive-edge/fwdoc_fw-iptv.stream/chunks.m3u8?nimblesessionid=187236039&wmsAuthSign=c2VydmVyX3RpbWU9OC8yMy8yMDI1IDg6MzA6MDIgUE0maGFzaF92YWx1ZT1lKzJuT3VyK3RiRU1lU2Y5cVN1YTZnPT0mdmFsaWRtaW51dGVzPTI=&demo
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://www.inwiptv.asia/demo.php&userAgent=exo_player;S.title=ต้นทีวี;scheme=http;type=video/mp4;end">
-<img src="https://www.fileinw.com/postor/20240617204638FWDoc.jpg" border="1px"></a>	
-    
-    
-<a href="intent://freelive2.inwstream.com:1936/freelive-edge/fwdoc_fw-iptv.stream/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9OC8yMC8yMDI1IDE6NTY6MzAgUE0maGFzaF92YWx1ZT13N2h6TGk4MVEyUWxwUVZhNEhqWjlnPT0mdmFsaWRtaW51dGVzPTI=
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/no&userAgent=></a>exo_player;S.title=ต้นทีวี;scheme=http;type=video/hls;end" class="channel">
-<img src="https://www.fileinw.com/postor/20240617204638FWDoc.jpg"
-border="1px">
-     <a href="intent://49.0.64.96:8007/WSCI
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://www.dooballfree24hrs.com/&userAgent=exo_player;S.title=Discovery;scheme=http;type=video/mp4;end" class="channel">
-                    <img src="https://i.ibb.co/gQLyLmK/logo-seience.png" alt="">
-    </a>
-                
-                
-            
- <a href="intent://49.0.64.96:8007/Animal
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://www.dooballfree24hrs.com/&userAgent=exo_player;S.title=Discovery;scheme=http;type=video/mp4;end" class="channel">
-                    <img src="https://i.ibb.co/bMtB5NKS/logo-animal.png" alt="">
-    </a>
-                
-    
-    
-        <a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/thainess/playlist.m3u8#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-        <img src="https://dookeela2.live/uploads/1742428803.png" alt="">
-    </a>
-    
-        <a href="intent://github.com/cattviptv2605/m3u8/raw/refs/heads/main/khongdee.m3u8#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-        <img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon///KhongDeeThailand.png" alt="">
-    </a>
-    
-<a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/truex-zyte/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.referer=https://dookeela.live/&userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://cms.dmpcdn.com/livetv/2023/04/28/46fb6170-e599-11ed-b606-c19576cb8b29_webp_original.webp" border="1px">
-</a>
-    
-    <a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/trueexploresci/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://cms.dmpcdn.com/livetv/2024/01/16/c9f16a20-b44c-11ee-8e80-c3f417d0d932_webp_original.webp" border="1px"></a>
+    card.innerHTML = `
+      <div class="channel-logo">
+        ${logoUrl ? `<img src="${logoUrl}" alt="${ch.name}" loading="lazy" onerror="this.style.display='none'">` : `<span>${fallbackIcon}</span>`}
+      </div>
+      <div class="channel-name">${ch.name}</div>
+    `;
+    card.addEventListener('click', () => openPlayer(ch));
+    grid.appendChild(card);
+  });
+}
 
-<a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/trueexplorewild/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://img5.pic.in.th/file/secure-sv1/ca686ee0-b44c-11ee-9f05-591527f02603_webp_original.webp" border="1px"></a>
+function updateTabCount() {
+  document.getElementById('playlistTab').textContent = `PLAYTV (${allChannels.length})`;
+}
 
-<a href="intent://dkl-c33es.cdn.akamaiz.com/dooballfree24hr/trueexplorelife/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://img2.pic.in.th/pic/486c7da0-e599-11ed-b481-1b121c78e74e_webp_original.png" border="1px"></a>
+// ✅ แยก URL กับ Referer
+function parseUrlAndReferer(fullUrl) {
+  let url = fullUrl, referer = '';
+  
+  if (fullUrl.includes('|referer=')) {
+    const parts = fullUrl.split('|referer=');
+    url = parts[0];
+    referer = parts[1] || '';
+  }
+  else if (fullUrl.includes('?referer=')) {
+    const parts = fullUrl.split('?referer=');
+    url = parts[0];
+    referer = parts[1] || '';
+  }
+  
+  return { url, referer };
+}
 
+function openPlayer(channel) {
+  currentFullUrl = channel.url;
+  const { url, referer } = parseUrlAndReferer(channel.url);
+  
+  document.getElementById('playerTitle').textContent = channel.name;
+  document.getElementById('playerModal').classList.remove('hidden');
+  document.getElementById('playerErr').style.display = 'none';
+  playVideo(url, referer);
+}
 
+function playVideo(url, referer = '') {
+  stopAllPlayers();
+  const video = document.getElementById('modalVideo');
 
-<a href="intent://liveera.live/demo_app/740/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://dookeela.live/uploads/1724166218.png" border="1px"></a>
-	
-<a href="intent://liveera.live/demo_app/563/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon///SamRujLok.png" border="1px"></a>
-
-<a href="intent://liveera.live/demo_app/555/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon///MySCI.png" border="1px"></a>
-
-<a href="intent://liveera.live/demo_app/555/playlist.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon///MySCI.png" border="1px"></a>
-
-<header>ดูหนัง</header>
-
-<a href="intent://master.streamhls.com/hlsr2/56e608b971e0a95935810a621eee8a18/master.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://www.moviefree-hd.com/wp-content/uploads/2025/04/G20-2025.jpg" border="1px"></a>
-
-
-<a href="intent://master.streamhls.com/hlsr2/8f68915f71768453b50174ffb60ee6f8/master.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end"> 
-<img src="https://www.movies-d.com/wp-content/uploads/2025/06/xUp13D7rhipxsHsD3oRdNOkalwg.webp" 
-border="1px"></a>
-
-
-<a href="intent://master.streamhls.com/hlsr2/ad4c79696fd3a9a9ee5294dfc3ff903b/master.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://s3.movie555.com/assets/images/poster/a/compressed/202505/36791wLisxrgSau6kxvCx6gfNQuZIwzvrdnEg.jpg.webp" border="1px"></a>
-
-
-<a href="intent://text-lb.xmoviedo24.com/playlist2/e2b3cb00/master.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://www.nung-th.net/wp-content/uploads/2025/08/The-Mother-203x300.webp" border="alt="คุณแม่">
-    </a>
-
-<a href="intent://main.24playerhd.com/newplaylist/ae0daf1d8f760a85597a7b2b/ae0daf1d8f760a85597a7b2b.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=เดอะลาส ยูเอส;scheme=https;type=video/mp4;end">
-<img src="https://www.nung-th.net/wp-content/uploads/2025/08/The-Last-of-Us-199x300.webp" border="1px"></a>
-
-<a href="intent://text-lb.xmoviedo24.com/playlist2/ded12e36/master.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=Simulant;scheme=https;type=video/mp4;end">
-<img src="https://www.nung-th.net/wp-content/uploads/2025/08/Simulant-199x300.webp" border="1px"></a>
-
-<a href="intent://text-lb.xmoviedo24.com/playlist2/82bcb513aHwXz/master.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=Superman;scheme=https;type=video/mp4;end">
-<img src="https://www.nung-th.net/wp-content/uploads/2025/08/Superman-203x300.webp" border="1px"></a>
-
-<a href="intent://main.24playerhd.com/newplaylist/4f2068078ffe65ecc6564fc7/4f2068078ffe65ecc6564fc7.m3u8
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=The Fantastic Four First Steps 4
-;scheme=https;type=video/mp4;end">
-<img src="https://www.nung-th.net/wp-content/uploads/2025/08/The-Fantastic-Four-First-Steps-4-199x300.webp" border="1px"></a>
-
-<a href="
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="" border="1px"></a>
-
-
-<header>
-        วิทยุออนไลน์
-    </header>
-    
-<a href="intent://playlist.xtemus.com/play.php?ch=t256y454t415642386v4v2y294
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://static.mytuner.mobi/media/tvos_radios/KvDHAwT62s.png" border="1px"></a>
-
-<a href="intent://atimeonline3.smartclick.co.th/green
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://static.mytuner.mobi/media/tvos_radios/52kDndQrUz.jpg" border="1px"></a>
-
-<a href="intent://atimeonline3.smartclick.co.th/efm
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://static.mytuner.mobi/media/tvos_radios/Ck8sVEmWdv.jpeg" border="1px"></a>
-
-<a href="intent://rr7---sn-5np5po4v-c33ze.googlevideo.com/videoplayback?expire=1755056523&ei=K7WbaMHHNrO24t4Pm-SXgAI&ip=223.24.165.17&id=o-ADQpfOydlvSdsSonDZ78LQU40dS4_6eoeDHYoos4GUQq&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1755034923%2C&mh=KH&mm=31%2C29&mn=sn-5np5po4v-c33ze%2Csn-5np5po4v-c33zr&ms=au%2Crdu&mv=m&mvi=7&pl=24&rms=au%2Cau&initcwndbps=420000&siu=1&bui=AY1jyLOJ6R9bf647WaRq-vlTK-vLYH3yInsGkSwtvBHdOKukJDaoZUlr-KWUMTqIYk__Od9K9g&spc=l3OVKR6MNCcnx5t6D0D9MQputYBiwJlYDnFA6UV9nWrkhYvujWSL2geRH6m_2DuI78Jllja93P5UhTQ03uxW1UL59Mc&vprv=1&svpuc=1&mime=video%2Fmp4&ns=1qI7k1jogJ_W3afA17XVOToQ&rqh=1&cnr=14&ratebypass=yes&dur=5385.404&lmt=1743167479447425&mt=1755034623&fvip=2&fexp=51331020%2C51548755&c=MWEB&sefc=1&txp=4538534&n=TDRjNjycmpyYZw&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Csiu%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Ccnr%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRgIhAPwadqPN2Wa7gqoSufOR5Gd0ZoQDeOIqs-GPq686VZtuAiEAvO21QqiGMr2ulo9f1c5SCoJsNovaBtOHkVMVvN86QPk%3D&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=APaTxxMwRQIhAIGlxzQ9nzq0uATnA3H4UnIijX_de5ctzPcD4-s60YhcAiALCdf2QULz7bKJg7LQfRYnDgiBFXY8M_JdQAgyacPJiQ%3D%3D&cpn=DQ32kGCYBbAUlsAO&cver=2.20250812.01.00&ptk=youtube_single&oid=J4M2k3QT-PCjoBBqmEP5LQ&ptchn=QbVt5dy_MAsMDbGpI5y6Mg&pltype=content
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="https://i.ytimg.com/vi/vDdxVPSp2J8/hq720.jpg?sqp=-oaymwEcCK4FEIIDSEbyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBVxfErrB5Ktp1NX-oZZeD32Pvt1Q" border="1px"></a>
-
-<a href="
-#Intent;package=com.mxtech.videoplayer.ad;S.userAgent=exo_player;S.title=ต้นทีวี;scheme=https;type=video/mp4;end">
-<img src="" border="1px"></a>
-
-
-
-</main>
-    
- 
-
-<script src="https://www.drv.tw/inc/wd.js?s=tonorchaiprasertnopparat"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<body bgcolor="000000">
-<center>
-    
-    <script type="text/javascript" src="jw/8/jwplayer.js"></script>
-<script type="text/javascript">jwplayer.key="eNFaXCjyURVoCCGiHp7HTQ3hDhE/AfL0g8VE1fRbL84=";</script>
-<table align='center' cellspacing='10'><tr><td align='center'><div id='anniversaryOverview'></div>
-	<script type='text/javascript'>				
-		jwplayer('anniversaryOverview').setup({			
-             width: '640',
-			aspectratio: '16:9',		
- 
-			'playlist': [
-    {
-      'sources': [
-        {
-          'default': false,
-          'file': 'https://freelive2.inwstream.com:1936/freelive-edge/fwdoc_fw-iptv.stream/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9OC8yMC8yMDI1IDE6NTM6MDggUE0maGFzaF92YWx1ZT1lL0N4b1YxT2toS04wVzJxWG5ZZi93PT0mdmFsaWRtaW51dGVzPTI=',
-          'label': '0',
-          'type': 'hls'
+  if (url.includes('.m3u8') || url.includes('m3u8')) {
+    if (Hls.isSupported()) {
+      hls = new Hls({
+        xhrSetup: (xhr) => {
+          if (referer) xhr.setRequestHeader('Referer', referer);
         }
-      ]
+      });
+      hls.loadSource(url);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
+      hls.on(Hls.Events.ERROR, (e, data) => {
+        if (data.fatal) document.getElementById('playerErr').style.display = 'block';
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = url;
+      video.play().catch(() => {});
     }
-  ],
-  'primary': 'html5',
-  'hlshtml': true,
-  'autostart': true	
-		});			
-	</script>
-    
-  <h2><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBXudk1s-aItn9yaPYq9QDT2SbzEZ_7rxOqV5XRfX36miwzuKSQncXwrw&s=10"></h2>
-</center>
-<img class="logo" src="https://www.dooballfree24hrs.com/_app/immutable/assets/logo.C5kNP5iJ.png" alt="Logo" width="100">
-    <div class="message"PLAYID XTREAM</div>
+  }
+  else if (url.includes('.mpd') || url.includes('mpd')) {
+    dashPlayer = dashjs.MediaPlayer().create();
+    dashPlayer.initialize(video, url, true);
+  }
+  else {
+    video.src = url;
+    video.play().catch(() => {
+      document.getElementById('playerErr').style.display = 'block';
+    });
+  }
+}
 
-</body></html>
+function stopAllPlayers() {
+  const video = document.getElementById('modalVideo');
+  video.pause();
+  video.removeAttribute('src');
+  if (hls) { hls.destroy(); hls = null; }
+  if (dashPlayer) { dashPlayer.reset(); dashPlayer = null; }
+}
+
+document.getElementById('closePlayer').addEventListener('click', () => {
+  document.getElementById('playerModal').classList.add('hidden');
+  stopAllPlayers();
+});
+
+// ✅ เปิดในแอปอื่น — ส่ง S.referer แยกต่างหาก ไม่ encode!
+document.getElementById('openInAppBtn').addEventListener('click', () => {
+  if (!currentFullUrl) return alert('ไม่มีลิงก์วิดีโอ');
+  
+  const { url, referer } = parseUrlAndReferer(currentFullUrl);
+  
+  let mimeType = 'video/*';
+  if (url.includes('.m3u8')) mimeType = 'application/vnd.apple.mpegurl';
+  else if (url.includes('.mpd')) mimeType = 'video/mp4';
+
+  // ✅ ส่ง URL ปกติ + ส่ง Referer ผ่าน S.referer= แยกต่างหาก — ไม่ encode เลย!
+  let intentUrl = `intent://${url.replace(/^https?:\/\//, '')}#Intent;` +
+    `scheme=https;` +
+    `type=${mimeType};`;
+  
+  // ✅ ส่ง referer แบบข้อความตรงๆ ไม่ผ่าน encodeURIComponent — แอปอ่านง่ายที่สุด
+  if (referer) {
+    intentUrl += `S.referer=${referer};`;
+  }
+  
+  intentUrl += `end`;
+
+  console.log('✅ ส่ง Intent:', intentUrl);
+  window.location.href = intentUrl;
+});
+
+// ✅ คัดลอกลิงก์ — คืนรูปแบบเดิม
+document.getElementById('copyBtn').addEventListener('click', () => {
+  if (!currentFullUrl) return alert('ไม่มีลิงก์');
+  navigator.clipboard.writeText(currentFullUrl).then(() => alert('✅ คัดลอกลิงก์แล้ว'));
+});
+
+document.getElementById('addPlaylistBtn').addEventListener('click', () => {
+  document.getElementById('addModal').classList.remove('hidden');
+  document.getElementById('loadStatus').textContent = '';
+  document.getElementById('playlistUrl').value = '';
+  document.getElementById('playlistFile').value = '';
+});
+document.getElementById('closeAddModal').addEventListener('click', () => {
+  document.getElementById('addModal').classList.add('hidden');
+});
+document.getElementById('addModal').addEventListener('click', (e) => {
+  if (e.target.id === 'addModal') document.getElementById('addModal').classList.add('hidden');
+});
+
+document.getElementById('loadBtn').addEventListener('click', async () => {
+  const urlInput = document.getElementById('playlistUrl').value.trim();
+  const fileInput = document.getElementById('playlistFile').files[0];
+  const status = document.getElementById('loadStatus');
+
+  if (!urlInput && !fileInput) {
+    status.textContent = '❌ กรุณาใส่ลิงก์ หรือเลือกไฟล์';
+    status.className = 'status-text status-err';
+    return;
+  }
+  status.textContent = '⏳ กำลังโหลด...';
+  status.className = 'status-text';
+
+  try {
+    let content = '', type = '';
+    
+    if (urlInput) {
+      type = getExt(urlInput);
+      if (!['m3u','m3u8','json','w3u'].includes(type)) {
+        status.textContent = '⚠️ รองรับ .m3u/.m3u8/.json/.w3u เท่านั้น';
+        status.className = 'status-text status-err';
+        return;
+      }
+      const res = await fetch(urlInput);
+      if (!res.ok) throw new Error('ดึงข้อมูลไม่ได้');
+      content = await res.text();
+    }
+
+    if (fileInput) {
+      type = getExt(fileInput.name);
+      if (!['m3u','m3u8','json','w3u'].includes(type)) {
+        status.textContent = '⚠️ รองรับ .m3u/.m3u8/.json/.w3u เท่านั้น';
+        status.className = 'status-text status-err';
+        return;
+      }
+      content = await readFile(fileInput);
+    }
+
+    let newChannels = [];
+    if (type === 'm3u' || type === 'm3u8') newChannels = parseM3U(content);
+    else if (type === 'json') newChannels = parseJSON(content);
+    else if (type === 'w3u') newChannels = parseW3U(content);
+
+    if (newChannels.length === 0) {
+      status.textContent = '❌ ไม่พบรายการช่องในไฟล์';
+      status.className = 'status-text status-err';
+      return;
+    }
+
+    allChannels = newChannels;
+    allGroups.clear();
+    allChannels.forEach(ch => allGroups.add(ch.group || 'อื่นๆ'));
+
+    status.textContent = `✅ โหลดสำเร็จ! ${newChannels.length} ช่อง`;
+    status.className = 'status-text status-ok';
+    
+    setTimeout(() => {
+      document.getElementById('addModal').classList.add('hidden');
+      activeGroup = 'all';
+      rebuildCategories();
+      renderChannels();
+      updateTabCount();
+    }, 1200);
+
+  } catch (err) {
+    status.textContent = `❌ ผิดพลาด: ${err.message}`;
+    status.className = 'status-text status-err';
+  }
+});
+
+document.getElementById('searchBox').addEventListener('input', (e) => {
+  renderChannels(e.target.value);
+});
+
+function getExt(url) {
+  try { return new URL(url).pathname.split('.').pop().toLowerCase(); }
+  catch { return url.split('.').pop().toLowerCase(); }
+}
+function readFile(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = e => resolve(e.target.result);
+    r.onerror = reject;
+    r.readAsText(file);
+  });
+}
+
+function parseM3U(text) {
+  const channels = [];
+  if (!text.includes('#EXTM3U')) return channels;
+  const lines = text.split('\n').filter(L => L.trim());
+  let info = null;
+  for (let L of lines) {
+    L = L.trim();
+    if (L.startsWith('#EXTINF:')) {
+      const name = L.match(/,(.+)$/)?.[1]?.trim() || 'ช่อง';
+      const logo = L.match(/tvg-logo="([^"]+)"/)?.[1] || '';
+      const group = L.match(/group-title="([^"]+)"/)?.[1] || 'อื่นๆ';
+      info = { name, logo, group, url: '' };
+    } else if (!L.startsWith('#') && info) {
+      info.url = L;
+      channels.push(info);
+      info = null;
+    }
+  }
+  return channels;
+}
+
+function parseJSON(text) {
+  try {
+    const d = JSON.parse(text);
+    const list = Array.isArray(d) ? d : (d.channels || d.data || d.items || []);
+    return list.map((it, i) => ({
+      name: it.name || it.title || `ช่อง ${i+1}`,
+      url: it.url || it.link || it.stream || '',
+      logo: it.logo || it.image || '',
+      group: it.group || it.category || 'อื่นๆ'
+    }));
+  } catch { return []; }
+}
+
+function parseW3U(text) {
+  try {
+    const d = JSON.parse(text);
+    const list = d.playlist || d.channels || [];
+    return list.map((it, i) => ({
+      name: it.name || it.title || `ช่อง ${i+1}`,
+      url: it.url || it.streamUrl || '',
+      logo: it.logo || it.icon || '',
+      group: it.group || 'อื่นๆ'
+    }));
+  } catch { return parseM3U(text); }
+}
+</script>
+
+</body>
+</html>
